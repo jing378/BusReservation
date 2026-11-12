@@ -1,0 +1,66 @@
+/* Shared grid layout for the admin and customer dashboards. */
+/* ---------- Dashboard layout ---------- */
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 4px 0 20px; }
+.kpi {
+    position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px;
+    padding: 16px 18px; border-radius: 14px; background: var(--panel); border: 1px solid var(--line);
+    transition: transform .2s ease, border-color .2s ease;
+}
+.kpi:hover { transform: translateY(-2px); border-color: rgba(59, 130, 246, .35); }
+.kpi-icon {
+    flex-shrink: 0; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
+    color: var(--c); background: color-mix(in oklab, var(--c), transparent 85%); font-size: 18px;
+}
+.kpi-meta { display: flex; flex-direction: column; min-width: 0; }
+.kpi-label { font-size: 12px; color: var(--muted); }
+.kpi-value { font-size: 22px; font-weight: 700; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 11.5px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi-meter { position: absolute; left: 0; bottom: 0; height: 3px; width: var(--fill); background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+.dash-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.dash-grid > * { min-width: 0; margin: 0 !important; }
+.dash-grid .span-2 { grid-column: span 2; }
+.dash-grid .span-3 { grid-column: 1 / -1; }
+.dash-side { display: flex; flex-direction: column; gap: 20px; }
+.dash-side > .panel { margin: 0; }
+
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.panel-head h3 { margin: 0; }
+.panel-link { font-size: 13px; color: #3b82f6; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+.panel-link:hover { color: #22d3ee; }
+
+/* Tables inside the grid fit their column instead of forcing 800px */
+.dash-grid .table { min-width: 0; }
+.dash-grid .table td, .dash-grid .table th { white-space: normal; }
+
+.seat-fill { display: flex; align-items: center; gap: 10px; min-width: 120px; }
+.seat-fill-text { font-variant-numeric: tabular-nums; min-width: 42px; }
+.seat-fill-bar { flex: 1; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, .08); overflow: hidden; }
+.seat-fill-bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #3b82f6, #22d3ee); }
+
+.weather-panel h3 { margin-bottom: 8px; }
+
+@media (max-width: 1280px) {
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dash-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dash-grid .span-2 { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+    .dash-grid { grid-template-columns: minmax(0, 1fr); }
+    .kpi-value { font-size: 19px; }
+}
+@media (max-width: 520px) {
+    .kpis { gap: 10px; }
+    .kpi { padding: 12px; }
+    .kpi-icon { display: none; }
+    .kpi-value { font-size: 17px; }
+}
+
+/* The main panel in the first row matches the height of the side column next to it. */
+.dash-grid > .span-2:first-child { align-self: stretch; }
+
+/* Phones: show the weather card first instead of after the long tables. */
+@media (max-width: 760px) {
+    .dash-side { display: contents; }
+    .dash-grid .weather-panel { order: -1; }
+}

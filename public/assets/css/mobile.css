@@ -1,0 +1,128 @@
+/*
+ * Phone & tablet fixes shared by every admin / customer page.
+ * Loaded last in <head> so it wins over the pages' inline styles.
+ */
+
+/* ---------- Tablet & phone (sidebar becomes an off-canvas drawer) ---------- */
+@media (max-width: 980px) {
+    /* Fixed top bar that holds the menu button, so it never covers page titles. */
+    .dash-wrap::before {
+        content: 'BusReserve';
+        position: fixed; top: 0; left: 0; right: 0; z-index: 997;
+        height: 60px; display: flex; align-items: center; justify-content: center;
+        font-weight: 700; letter-spacing: 0.3px; font-size: 16px;
+        background: rgba(11, 18, 32, 0.9);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+    }
+
+    .hamburger-btn, #mobileMenuToggle {
+        position: fixed !important; top: 10px !important; left: 12px !important; z-index: 998 !important;
+        width: 40px !important; height: 40px !important;
+        background: rgba(59, 130, 246, 0.14) !important; border-color: rgba(59, 130, 246, 0.35) !important;
+    }
+
+    .content {
+        padding: 76px 14px 28px !important;
+        max-height: 100dvh;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Dim the page while the drawer is open; tapping it closes the drawer (sidebar.js). */
+    .dash-wrap::after {
+        content: ''; position: fixed; inset: 0; z-index: 996;
+        background: rgba(0, 0, 0, 0.55);
+        opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    }
+    .dash-wrap.sidebar-open::after { opacity: 1; pointer-events: auto; }
+    .sidebar { z-index: 999 !important; max-width: 82vw; }
+
+    /* Page header: let long titles and action buttons wrap instead of colliding. */
+    .topbar { flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+    .topbar .welcome { min-width: 0; flex: 1 1 auto; }
+    .welcome h2 { font-size: 20px; line-height: 1.25; overflow-wrap: anywhere; }
+
+    /* Dashboards: the fixed 400px column (inline style) and the bus carousel must fit the screen. */
+    .main-layout { grid-template-columns: minmax(0, 1fr) !important; gap: 16px !important; }
+    .main-layout > *, .dashboard-grid > *, .bus-layout-section, .bus-carousel { min-width: 0; max-width: 100%; }
+    .dashboard-grid { grid-template-columns: minmax(0, 1fr) !important; }
+
+    .seat-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) 14px repeat(3, minmax(0, 1fr)) !important;
+        gap: 6px !important; max-width: 300px !important;
+    }
+    .seat { font-size: 10px !important; min-width: 0; }
+    .bus-card { padding: 16px !important; }
+    .carousel-btn { opacity: 1 !important; visibility: visible !important; width: 32px !important; height: 32px !important; top: 34px !important; transform: none !important; }
+    .carousel-btn.prev { left: 4px !important; }
+    .carousel-btn.next { right: 4px !important; }
+
+    /* Panels with a title + action button side by side */
+    .panel > div[style*="justify-content: space-between"] { flex-wrap: wrap; gap: 10px; }
+
+    /* Generic: media and form controls never exceed the screen. */
+    img, video, canvas, svg { max-width: 100%; }
+    input, select, textarea { max-width: 100%; }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+    .content { padding: 72px 12px 24px !important; }
+    .panel { padding: 12px !important; border-radius: 12px; }
+
+    /* iOS zooms into inputs smaller than 16px; keep form text at 16px. */
+    input:not([type="checkbox"]):not([type="radio"]), select, textarea { font-size: 16px !important; }
+
+    /* Tables become stacked cards; labels come from data-label (mobile-responsive.js). */
+    .table-wrap { overflow: visible !important; border: 0 !important; background: transparent !important; }
+    .table { min-width: 0 !important; width: 100% !important; border: 0 !important; }
+    .table thead { display: none; }
+    .table, .table tbody, .table tr, .table td { display: block; }
+    .table tr {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+        padding: 4px 12px; margin-bottom: 10px;
+    }
+    .table tbody tr:hover { background: var(--panel); }
+    .table td {
+        display: flex; justify-content: space-between; align-items: center; gap: 12px;
+        padding: 9px 0 !important; border: 0 !important; border-bottom: 1px dashed var(--line) !important;
+        text-align: right; white-space: normal !important; min-height: 38px; overflow-wrap: anywhere;
+    }
+    .table td:last-child { border-bottom: 0 !important; }
+    .table td::before {
+        content: attr(data-label);
+        flex-shrink: 0; max-width: 45%; text-align: left;
+        color: var(--muted); font-size: 12px; font-weight: 500;
+    }
+    .table td:not([data-label])::before, .table td[data-label=""]::before { display: none; }
+    .table td[colspan] { justify-content: center; text-align: center; }
+    .table td[colspan]::before { display: none; }
+    .table td .actions, .table td.actions { justify-content: flex-end; flex-wrap: wrap; }
+
+    /* Pagination and filter rows wrap */
+    .pagination { flex-wrap: wrap; gap: 8px; justify-content: center !important; }
+    .pagination .group { flex: 1 1 100%; justify-content: center !important; display: flex; gap: 6px; }
+    .search-form { flex-wrap: wrap; }
+    .search-form > * { flex: 1 1 auto; }
+
+    /* Modals: full-width sheets that scroll internally */
+    .modal { padding: 12px !important; align-items: flex-start !important; padding-top: 24px !important; }
+    .modal-content, [class*="modal-container"], [class*="modal-content"] {
+        width: 100% !important; max-width: 100% !important; max-height: calc(100dvh - 48px) !important; overflow-y: auto;
+    }
+    .confirm-modal-content, .delete-modal-content, .cancel-modal-content { width: calc(100% - 24px) !important; }
+    .modal-footer, .confirm-modal-footer { flex-wrap: wrap; }
+    .modal-footer > *, .confirm-modal-footer > *, .confirm-modal-footer form { flex: 1 1 auto; }
+    .confirm-modal-footer .confirm-modal-btn { width: 100%; min-width: 0 !important; }
+
+    /* Multi-column form rows inside modals stack */
+    .booking-container, .booking-form-row, .form-row, .form-grid { grid-template-columns: minmax(0, 1fr) !important; }
+
+    /* Stat / quick-action grids */
+    .stats, .cards, .quick-actions { grid-template-columns: minmax(0, 1fr) !important; }
+    .stats-grid, .summary-grid, .stats-cards { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+
+@media (max-width: 380px) {
+    .stats-grid, .summary-grid, .stats-cards { grid-template-columns: minmax(0, 1fr) !important; }
+}

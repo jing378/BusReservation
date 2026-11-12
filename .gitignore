@@ -1,0 +1,55 @@
+# ---------- Secrets & environment ----------
+# Real credentials (DB password, APP_KEY, OpenWeather key) live only in .env.
+.env
+.env.*
+!.env.example
+/auth.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+id_rsa*
+id_ed25519*
+
+# ---------- Data that may contain personal information ----------
+# Database dumps/exports (user names, emails, password hashes, bookings)
+*.sql
+*.sql.gz
+*.sqlite
+*.sqlite3
+*.db
+# Logs (activity log stores usernames and IP addresses)
+*.log
+/storage/logs/*
+!/storage/logs/.gitignore
+
+# ---------- Dependencies & build output ----------
+/node_modules
+/vendor
+/public/build
+/public/hot
+/public/storage
+/public/fonts-manifest.dev.json
+
+# ---------- Framework runtime files ----------
+/storage/*.key
+/storage/pail
+.phpunit.result.cache
+/.phpunit.cache
+
+# ---------- Editors, tools & OS ----------
+/.claude/settings.local.json
+/.codex
+/.cursor/
+/.idea
+/.nova
+/.vscode
+/.zed
+.phpactor.json
+_ide_helper.php
+Homestead.json
+Homestead.yaml
+.DS_Store
+Thumbs.db
+desktop.ini

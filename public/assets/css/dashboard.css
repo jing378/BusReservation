@@ -1,0 +1,318 @@
+:root{
+    --bg:#0b1220;--panel:#0f172a;--text:#e5e7eb;--muted:#94a3b8;--line:rgba(255,255,255,.08);
+    --sidebar-w:240px
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.dash-wrap{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:100vh;visibility:hidden;overflow:hidden}
+.dash-wrap[data-ready="1"]{visibility:visible;transition:grid-template-columns .25s ease}
+.sidebar{background:linear-gradient(180deg,#0f172a,#0b1220);border-right:1px solid var(--line);padding:18px 14px;display:flex;flex-direction:column;gap:16px;transition:padding .25s ease;height:100vh;overflow-y:auto;overflow-x:hidden}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.4px}
+.brand .btn-ghost{margin-left:auto}
+.brand i{color:#3b82f6}
+.menu{display:flex;flex-direction:column;gap:6px}
+.menu a{padding:10px 12px;border-radius:10px;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px;border:1px solid transparent}
+.menu a:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
+.menu a.active{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.35)}
+.logout{margin-top:auto;padding:10px 12px;border-radius:10px;color:#ef4444;text-decoration:none;border:1px solid rgba(239,68,68,.35);background:rgba(239,68,68,.08)}
+.content{padding:20px 22px;max-height:100vh;overflow:auto}
+.dash-wrap[data-ready="1"] .content{transition:margin-left .25s ease}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.welcome h2{margin:0 0 4px 0;font-size:22px}
+.welcome p{margin:0;color:var(--muted);font-size:13px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--text);cursor:pointer}
+.btn-ghost:hover{filter:brightness(1.1)}
+/* Destructive button */
+.btn-danger{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border:1px solid rgba(239,68,68,.6)}
+.btn-danger i{color:#fff}
+.btn-danger:hover{filter:brightness(1.06)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:10px 0 18px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:10px 0 18px}
+.card{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.card .icon{width:38px;height:38px;border-radius:10px;background:color-mix(in oklab,var(--text),var(--bg) 85%);display:grid;place-items:center;color:var(--bg);box-shadow:0 10px 24px color-mix(in oklab,var(--text),var(--bg) 70%)}
+.card .icon i{color:var(--c)}
+.card .meta .label{display:block;color:var(--muted);font-size:12px}
+.card .meta .value{font-weight:700;font-size:18px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 14px}
+.panel + .panel{margin-top:0}
+.content > .panel:last-child{margin-bottom:0}
+/* Only stack cards vertically inside panel sections, not in the stats grid */
+.panel .card + .card{margin-top:14px}
+.stats .card{margin-top:0}
+.panel h3{margin:0 0 12px 0;font-size:16px}
+.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.qa{display:flex;align-items:center;gap:10px;justify-content:center;padding:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;color:var(--text);cursor:pointer}
+
+/* Hamburger button */
+.hamburger-btn{display:none}
+
+/* Mobile responsive - hide sidebar by default */
+@media(max-width:980px){
+    .dash-wrap{grid-template-columns:1fr;position:relative}
+    .sidebar{position:fixed;left:-100%;top:0;bottom:0;width:var(--sidebar-w);z-index:999;transition:left 0.3s ease;background:linear-gradient(180deg,#0f172a,#0b1220)}
+    .dash-wrap.sidebar-open .sidebar{left:0;box-shadow:0 0 20px rgba(0,0,0,0.5)}
+    .content{margin-left:0;grid-column:1;padding-top:0}
+    .hamburger-btn{display:flex!important;position:fixed;top:20px;left:20px;z-index:998}
+    .topbar{margin-bottom:12px}
+    .brand .logo-icon{display:inline}
+    .brand span{display:inline}
+    .stats{grid-template-columns:1fr 1fr}
+    .quick-actions{grid-template-columns:1fr 1fr}
+    /* Close button styling for sidebar on mobile */
+    .sidebar .btn-ghost{display:flex}
+}
+
+@media(max-width:640px){
+    .dash-wrap{grid-template-columns:1fr}
+    .sidebar{position:fixed;left:-100%;width:var(--sidebar-w)}
+    .stats{grid-template-columns:1fr}
+    .quick-actions{grid-template-columns:1fr}
+}
+
+/* Scrollbar - global (Firefox + WebKit) */
+html{scrollbar-color: color-mix(in oklab,#3b82f6,var(--bg) 40%) rgba(255,255,255,.06);scrollbar-width: thin}
+/* WebKit */
+*::-webkit-scrollbar{width:10px;height:10px}
+*::-webkit-scrollbar-track{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px}
+*::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#3b82f6,#2563eb);border-radius:10px;border:2px solid transparent;background-clip:padding-box;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+*::-webkit-scrollbar-thumb:hover{filter:brightness(1.08)}
+/* Make table wrappers and modal bodies show custom scrollbars */
+.table-wrap,.modal-content{scrollbar-color: color-mix(in oklab,#3b82f6,var(--bg) 40%) rgba(255,255,255,.06);scrollbar-width: thin}
+
+/* Modal (shared) */
+.modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:24px 24px 15vh 24px;animation:fadeIn 0.2s ease-out}
+.modal-content{background:var(--panel);color:var(--text);margin:0 auto;padding:0;border-radius:12px;border:1px solid var(--line);width:90%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.4);animation:modalSlideIn 0.3s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes modalSlideIn{from{opacity:0;transform:translateY(-20px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.is-visible{animation:fadeIn 0.2s ease-out}
+.is-animating-out{animation:modalSlideOut 0.22s ease-in forwards}
+@keyframes modalSlideOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-10px) scale(0.98)}}
+/* Out animation for modals with translate(-50%, -50%) positioning */
+.confirm-modal-content.is-animating-out,.delete-modal-content.is-animating-out,.cancel-modal-content.is-animating-out{animation:modalSlideOutCentered 0.22s ease-in forwards}
+@keyframes modalSlideOutCentered{from{opacity:1;transform:translate(-50%,-50%) scale(1)}to{opacity:0;transform:translate(-50%,calc(-50% - 10px)) scale(0.98)}}
+.is-hiding{animation:overlayFadeOut 0.2s ease-in forwards}
+@keyframes overlayFadeOut{from{opacity:1}to{opacity:0}}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
+.modal-body{padding:14px 16px}
+.modal-footer{display:flex;justify-content:flex-end;gap:8px;padding:14px 16px;border-top:1px solid var(--line)}
+.close{background:none;border:0;font-size:22px;cursor:pointer;color:var(--muted)}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;margin-bottom:6px;font-weight:500;color:var(--text)}
+.form-group input,.form-group select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}
+.error{color:#dc3545;font-size:.875rem;margin-top:.25rem;display:block}
+
+/* Collapsed sidebar */
+.dash-wrap.collapsed{--sidebar-w:72px;grid-template-columns:72px 1fr}
+.dash-wrap.collapsed .sidebar{padding:14px 10px;position:static}
+.dash-wrap.collapsed .brand{justify-content:center}
+.dash-wrap.collapsed .brand .logo-icon{display:none}
+.dash-wrap.collapsed .brand span{display:none}
+.dash-wrap.collapsed .brand .btn-ghost{margin-left:0}
+.dash-wrap.collapsed .menu a{justify-content:center}
+.dash-wrap.collapsed .menu a span{display:none}
+.dash-wrap.collapsed .logout{display:flex;justify-content:center}
+.dash-wrap.collapsed .logout span{display:none}
+.dash-wrap.collapsed .content{margin-left:0}
+
+/* On mobile screens, override collapsed sidebar to be fixed overlay */
+@media(max-width:980px){
+    .dash-wrap.collapsed .sidebar{position:fixed!important;left:-100%;top:0;bottom:0;width:var(--sidebar-w);z-index:999;padding:18px 14px;transition:left 0.3s ease}
+    .dash-wrap.collapsed.sidebar-open .sidebar{left:0}
+}
+
+/* Table Styles */
+.table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 800px;
+}
+
+.table th {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    font-weight: 600;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Table cell content styling */
+.table td.actions {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Align actions header with action buttons */
+.table th.actions {
+    text-align: center;
+}
+
+.table td.actions .btn {
+    margin: 0 2px;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+/* Edit button - bluish style */
+.btn-edit{
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+    color:#ffffff;
+    border:1px solid rgba(59,130,246,.6);
+}
+.btn-edit i{color:#ffffff}
+.btn-edit:hover{filter:brightness(1.06)}
+
+/* Badge styling */
+.role-badge, .status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+}
+
+.role-admin { 
+    background: rgba(220, 53, 69, 0.2); 
+    color: #dc3545; 
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.role-staff { 
+    background: rgba(255, 193, 7, 0.2); 
+    color: #ffc107; 
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.role-customer { 
+    background: rgba(108, 117, 125, 0.2); 
+    color: #6c757d; 
+    border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+.status-active { 
+    background: rgba(40, 167, 69, 0.2); 
+    color: #28a745; 
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.status-inactive { 
+    background: rgba(108, 117, 125, 0.2); 
+    color: #6c757d; 
+    border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+/* Responsive table behavior */
+@media (max-width: 768px) {
+    .table-wrap {
+        border-radius: 8px;
+    }
+    
+    .table {
+        font-size: 13px;
+        min-width: 700px;
+    }
+    
+    .table th,
+    .table td {
+        padding: 10px 12px;
+    }
+    
+    .table th {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .table {
+        min-width: 600px;
+    }
+    
+    .table th,
+    .table td {
+        padding: 8px 10px;
+    }
+    
+    .role-badge, .status-badge {
+        font-size: 10px;
+        padding: 3px 6px;
+        min-width: 50px;
+    }
+    
+    .table td.actions .btn {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce){
+	.is-visible,
+	.is-hiding,
+	.is-animating-out{animation:none!important}
+}
+
+
+
+/* ---------- Organised sidebar (resources/views/partials/sidebar.blade.php) ---------- */
+.sidebar .menu{gap:2px;flex:1 1 auto}
+.menu-section{display:flex;flex-direction:column;gap:2px}
+.menu-section + .menu-section{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.menu-heading{padding:0 12px 6px;font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#64748b;white-space:nowrap}
+.sidebar .menu a{position:relative;gap:12px;padding:9px 12px;font-size:14px;color:#cbd5e1;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.sidebar .menu a i{width:18px;text-align:center;color:#64748b;transition:color .2s ease,transform .2s ease}
+.sidebar .menu a span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar .menu a:hover{color:#fff}
+.sidebar .menu a:hover i{color:#93c5fd;transform:translateX(1px)}
+.sidebar .menu a.active{color:#fff;font-weight:500}
+.sidebar .menu a.active i{color:#3b82f6}
+.sidebar .menu a.active::before{content:'';position:absolute;left:-14px;top:8px;bottom:8px;width:3px;border-radius:0 3px 3px 0;background:linear-gradient(180deg,#3b82f6,#22d3ee)}
+
+.sidebar-footer{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding-top:14px;border-top:1px solid var(--line)}
+.sidebar-footer .logout{margin-top:0;display:flex;align-items:center;gap:10px}
+.sidebar-user{display:flex;align-items:center;gap:10px;padding:8px;border-radius:12px;text-decoration:none;color:var(--text);border:1px solid transparent;transition:background .2s ease,border-color .2s ease}
+.sidebar-user:hover{background:rgba(255,255,255,.04);border-color:var(--line)}
+.sidebar-avatar{flex-shrink:0;display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3b82f6,#22d3ee);color:#fff;font-weight:700;font-size:13px}
+.sidebar-user-meta{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.sidebar-user-meta strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-user-meta small{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Collapsed (icons only) */
+.dash-wrap.collapsed .menu-heading{font-size:0;padding:0;height:0}
+.dash-wrap.collapsed .menu-section + .menu-section{margin-top:8px;padding-top:8px}
+.dash-wrap.collapsed .sidebar .menu a{padding:10px}
+.dash-wrap.collapsed .sidebar .menu a.active::before{left:-10px}
+.dash-wrap.collapsed .sidebar-user{justify-content:center;padding:6px 0}
+.dash-wrap.collapsed .sidebar-user-meta{display:none}
