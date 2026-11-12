@@ -76,29 +76,9 @@ class WeatherDashboard {
 
     createOfflineError() {
         return `
-            <div class="weather-offline-container">
-                <div class="offline-content-wrapper">
-                    <lottie-player 
-                        src="/assets/animations/Error 404.json" 
-                        background="transparent" 
-                        speed="1" 
-                        loop 
-                        autoplay
-                        class="offline-lottie">
-                    </lottie-player>
-                    <div class="offline-error-message">
-                        <div class="offline-error-title">
-                            <i class="fas fa-wifi-slash"></i>
-                            <span>Couldn't Connect to Internet</span>
-                        </div>
-                        <div class="offline-error-description">
-                            Unable to load weather information
-                        </div>
-                        <div class="offline-error-hint">
-                            Check your connection and refresh the page
-                        </div>
-                    </div>
-                </div>
+            <div class="hero-weather-status is-error">
+                <i class="fas fa-wifi"></i>
+                <span>Couldn't connect to the internet. Check your connection to load the weather.</span>
             </div>
         `;
     }
@@ -171,38 +151,29 @@ class WeatherDashboard {
 
         const advisory = this.getWeatherAdvisory(weatherData);
         const fallbackIcon = this.getFallbackIcon(weatherData.description);
-        
+
         return `
-            <div class="weather-card">
-                <div class="weather-card-header">
-                    <h4>${city}</h4>
-                </div>
-                <div class="weather-info">
-                    <img src="https://openweathermap.org/img/w/${weatherData.icon}.png" 
+            <div class="hero-weather">
+                <div class="hero-weather-now">
+                    <img src="https://openweathermap.org/img/wn/${weatherData.icon}@2x.png"
                          alt="${weatherData.description}"
-                         style="width: 50px; height: 50px;"
+                         class="hero-weather-icon"
                          onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-                    <i class="fas fa-${fallbackIcon} fa-2x" style="display:none;color:#3b82f6;"></i>
-                    <div class="temperature">${Math.round(weatherData.temperature)}°C</div>
-                    <div class="condition">${weatherData.description}</div>
-                    <div class="weather-details">
-                        <div class="weather-detail-item">
-                            <i class="fas fa-droplet text-blue-400"></i>
-                            <span>${weatherData.humidity}<small>%</small></span>
-                        </div>
-                        <div class="weather-detail-item">
-                            <i class="fas fa-wind text-gray-400"></i>
-                            <span>${Math.round(weatherData.wind_speed)}<small>km/h</small></span>
-                        </div>
-                        <div class="weather-detail-item">
-                            <i class="fas fa-temperature-half text-orange-400"></i>
-                            <span>${Math.round(weatherData.feels_like)}<small>°C</small></span>
-                        </div>
+                    <i class="fas fa-${fallbackIcon} hero-weather-icon-fallback" style="display:none;"></i>
+                    <div class="hero-weather-temp">${Math.round(weatherData.temperature)}°C</div>
+                    <div class="hero-weather-desc">
+                        <strong>${weatherData.description}</strong>
+                        <span><i class="fas fa-location-dot"></i> ${city}</span>
                     </div>
                 </div>
+                <div class="hero-weather-meta">
+                    <span><i class="fas fa-droplet"></i> ${weatherData.humidity}% humidity</span>
+                    <span><i class="fas fa-wind"></i> ${Math.round(weatherData.wind_speed)} km/h</span>
+                    <span><i class="fas fa-temperature-half"></i> Feels ${Math.round(weatherData.feels_like)}°C</span>
+                </div>
                 ${advisory ? `
-                <div class="weather-advisory">
-                    <i class="fas fa-exclamation-triangle"></i>
+                <div class="hero-weather-advisory">
+                    <i class="fas fa-triangle-exclamation"></i>
                     <span>${advisory}</span>
                 </div>
                 ` : ''}
@@ -328,7 +299,7 @@ class WeatherDashboard {
 
         // Show loading state
         weatherContainer.innerHTML = `
-            <div class="loading-weather" style="text-align: center; padding: 20px; color: #94a3b8;">
+            <div class="hero-weather-status">
                 <i class="fas fa-spinner fa-spin"></i> Loading weather information...
             </div>
         `;
@@ -371,11 +342,7 @@ class WeatherDashboard {
                 throw new Error('Failed to load weather information for your current location.');
             }
 
-            weatherContainer.innerHTML = `
-                <div class="weather-slide">
-                    ${this.createWeatherCard(weather.location || 'Current location', weather)}
-                </div>
-            `;
+            weatherContainer.innerHTML = this.createWeatherCard(weather.location || 'Current location', weather);
             this.currentSlide = 0;
             this.totalSlides = 1;
 
@@ -391,7 +358,7 @@ class WeatherDashboard {
                 let errorIcon = 'exclamation-circle';
                 
                 weatherContainer.innerHTML = `
-                    <div class="error-weather" style="text-align: center; padding: 20px; color: #ef4444;">
+                    <div class="hero-weather-status is-error">
                         <i class="fas fa-${errorIcon}"></i> ${errorMessage}
                     </div>
                 `;

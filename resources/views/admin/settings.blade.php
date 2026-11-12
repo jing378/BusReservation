@@ -291,133 +291,80 @@
         opacity: 1 !important;
     }
     
-    /* Comprehensive Responsive Design */
-    @media (max-width: 992px) {
-        .table {
-            font-size: 13px;
-        }
-        
-        .table th,
-        .table td {
-            padding: 8px;
-        }
-        
-        .status-badge {
-            font-size: 11px;
-            padding: 3px 8px;
-        }
+    /* Settings page layout */
+    .settings-page { display: flex; flex-direction: column; gap: 18px; }
+    .settings-page .panel { margin: 0; padding: 22px 24px; border-radius: 16px; }
+    .settings-page .panel > h3 { display: flex; align-items: center; gap: 10px; font-size: 16px; margin: 0 0 18px; }
+    .settings-page .panel > h3 i { color: #3b82f6; }
+    .settings-alert { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; border: 1px solid; }
+    .settings-alert.is-success { color: #86efac; background: rgba(34,197,94,.08); border-color: rgba(34,197,94,.3); }
+    .settings-alert.is-error { color: #fca5a5; background: rgba(239,68,68,.08); border-color: rgba(239,68,68,.3); }
+    .settings-alert.is-info { color: #cbd5e1; background: rgba(255,255,255,.04); border-color: var(--line); }
+
+    /* Profile header */
+    .profile-head { display: flex; align-items: center; gap: 16px; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .profile-avatar { width: 60px; height: 60px; flex: 0 0 60px; border-radius: 50%; background: linear-gradient(135deg, #0ea5e9, #3b82f6); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 20px; box-shadow: 0 6px 16px rgba(14,165,233,.25); }
+    .profile-identity { flex: 1 1 auto; min-width: 0; }
+    .profile-name { font-size: 18px; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
+    .profile-since { margin-top: 4px; font-size: 12.5px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+    .status-pill { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+    .status-pill.is-active { background: rgba(34,197,94,.12); color: #86efac; border: 1px solid rgba(34,197,94,.35); }
+    .status-pill.is-disabled { background: rgba(249,115,22,.12); color: #fdba74; border: 1px solid rgba(249,115,22,.35); }
+    .status-pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+    /* Profile form */
+    .profile-form { display: flex; flex-direction: column; gap: 22px; }
+    .form-section-title { font-size: 12px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 12px; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; }
+    .profile-form .field { min-width: 0; }
+    .profile-form .input-container { padding: 11px 14px; }
+    .profile-form .input-container input,
+    .profile-form .input-container select { font-family: inherit; width: 100%; min-width: 0; }
+    .profile-form .input-container input::placeholder { color: #64748b; }
+    .profile-form .field label .optional { color: #64748b; }
+    .field-error { color: #f87171; font-size: 12px; }
+    .form-actions { display: flex; justify-content: flex-end; padding-top: 18px; border-top: 1px solid var(--line); }
+    .form-actions .btn { padding: 11px 20px; font-weight: 500; }
+
+    /* System maintenance */
+    .maint-label { font-size: 12px; color: #9ca3af; margin: 0 0 10px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+    .maint-block + .maint-block { margin-top: 22px; }
+    .trip-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .trip-stat { padding: 14px 16px; border-radius: 10px; border-left: 3px solid var(--c); background: color-mix(in srgb, var(--c) 9%, transparent); min-width: 0; }
+    .trip-stat span { display: block; font-size: 12px; color: #9ca3af; margin-bottom: 4px; }
+    .trip-stat strong { font-size: 26px; font-weight: 700; color: var(--c); line-height: 1.1; }
+    .data-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; padding: 16px; border-radius: 12px; background: linear-gradient(135deg, rgba(168,85,247,.06), rgba(99,102,241,.06)); border: 1px solid rgba(255,255,255,.05); }
+    .data-stat { min-width: 0; }
+    .data-stat .data-stat-title { font-size: 13px; color: #e5e7eb; font-weight: 600; }
+    .data-stat strong { display: block; font-size: 26px; font-weight: 700; color: var(--c); margin: 2px 0; line-height: 1.2; }
+    .data-stat small { font-size: 11.5px; color: var(--muted); }
+    .cleanup-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 14px 16px; border-radius: 12px; background: rgba(168,85,247,.06); border: 1px solid rgba(168,85,247,.22); }
+    .cleanup-bar .btn-clean { background: linear-gradient(135deg, #a855f7, #9333ea); border: 1px solid rgba(168,85,247,.6); padding: 10px 18px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+    .cleanup-last { font-size: 12px; line-height: 1.5; color: #9ca3af; }
+    .cleanup-last strong { display: block; color: #d8b4fe; font-weight: 500; }
+    .cleanup-notes { margin-left: auto; padding-left: 16px; border-left: 1px solid rgba(255,255,255,.1); font-size: 12px; color: #b8c7db; line-height: 1.6; text-align: right; }
+    .cleanup-notes i { color: #86efac; margin-right: 4px; }
+
+    @media (max-width: 1100px) {
+        .data-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
     }
-    
-    @media (max-width: 768px) {
-        .table {
-            font-size: 12px;
-        }
-        
-        .table th,
-        .table td {
-            padding: 6px;
-        }
-        
-        .panel h3 {
-            font-size: 1rem;
-        }
-        
-        .status-badge {
-            font-size: 10px;
-            padding: 2px 6px;
-        }
-        
-        .btn {
-            padding: 8px 12px;
-            font-size: 13px;
-        }
-        
-        .input-container {
-            font-size: 14px;
-        }
-        
-        .input-container input,
-        .input-container select {
-            padding: 10px 12px;
-        }
+    @media (max-width: 720px) {
+        .settings-page .panel { padding: 18px 16px; }
+        .form-grid { grid-template-columns: 1fr; gap: 14px; }
+        .profile-head { flex-wrap: wrap; }
+        .profile-head .status-pill { margin-left: 76px; }
+        .form-actions .btn { width: 100%; justify-content: center; }
+        .cleanup-bar { flex-direction: column; align-items: stretch; gap: 12px; }
+        .cleanup-bar .btn-clean { width: 100%; justify-content: center; }
+        .cleanup-notes { margin-left: 0; padding-left: 0; padding-top: 12px; border-left: 0; border-top: 1px solid rgba(255,255,255,.1); text-align: left; }
     }
-    
-    @media (max-width: 576px) {
-        .table {
-            font-size: 11px;
-        }
-        
-        .table th,
-        .table td {
-            padding: 4px;
-        }
-        
-        .panel {
-            padding: 0.75rem;
-        }
-        
-        .panel h3 {
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        .status-badge {
-            font-size: 9px;
-            padding: 1px 4px;
-        }
-        
-        .btn {
-            padding: 6px 10px;
-            font-size: 12px;
-        }
-        
-        .input-container {
-            font-size: 13px;
-        }
-        
-        .input-container input,
-        .input-container select {
-            padding: 8px 10px;
-        }
-    }
-    
     @media (max-width: 480px) {
-        .table {
-            font-size: 10px;
-        }
-        
-        .table th,
-        .table td {
-            padding: 3px;
-        }
-        
-        .panel {
-            padding: 0.5rem;
-        }
-        
-        .panel h3 {
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .status-badge {
-            font-size: 8px;
-            padding: 1px 3px;
-        }
-        
-        .btn {
-            padding: 5px 8px;
-            font-size: 11px;
-        }
-        
-        .input-container {
-            font-size: 12px;
-        }
-        
-        .input-container input,
-        .input-container select {
-            padding: 6px 8px;
-        }
+        .trip-stats { gap: 8px; }
+        .trip-stat { padding: 10px 12px; }
+        .trip-stat strong { font-size: 22px; }
+        .data-stat strong { font-size: 22px; }
+        .profile-avatar { width: 52px; height: 52px; flex-basis: 52px; font-size: 18px; }
+        .profile-head .status-pill { margin-left: 68px; }
     }
     </style>
     <link rel="stylesheet" href="{{ asset('assets/css/mobile.css') }}">
@@ -429,207 +376,171 @@
         <button class="btn-ghost hamburger-btn" id="mobileMenuToggle" title="Toggle menu"><i class="fas fa-bars"></i></button>
         <main class="content">
             <header class="topbar">
-                <div class="welcome"><h2>Settings</h2><p>Profile & Application preferences</p></div>
-                <div class="actions"></div>
+                <div class="welcome"><h2>Settings</h2><p>Profile &amp; application preferences</p></div>
             </header>
-            <section class="panel" style="margin-bottom:16px;">
-                <h3>My Profile</h3>
+
+            <div class="settings-page">
+            <section class="panel">
+                <h3><i class="fas fa-user-gear"></i> My Profile</h3>
                 @if ($profile)
-                @if ($profileOk)<div class="qa" style="justify-content:flex-start;color:#22c55e"><i class="fas fa-check-circle"></i><span>{{ $profileOk }}</span></div>@endif
-                @if ($profileErrors)<div class="qa" style="justify-content:flex-start;color:#ef4444"><i class="fas fa-circle-exclamation"></i><span>Please fix the form errors.</span></div>@endif
-                <div style="display:flex; gap:20px; align-items:center; margin-bottom:16px;">
-                    <div style="width:64px; height:64px; border-radius:50%; background:#0ea5e9; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:20px;">
-                        {{ $initials ?: 'U' }}
+                @if ($profileOk)<div class="settings-alert is-success"><i class="fas fa-check-circle"></i><span>{{ $profileOk }}</span></div>@endif
+                @if ($profileErrors)<div class="settings-alert is-error"><i class="fas fa-circle-exclamation"></i><span>Please fix the form errors.</span></div>@endif
+
+                <div class="profile-head">
+                    <div class="profile-avatar">{{ $initials ?: 'U' }}</div>
+                    <div class="profile-identity">
+                        <div class="profile-name">{{ $profile['full_name'] }}</div>
+                        <div class="profile-since"><i class="fas fa-calendar"></i> Member since {{ date('M d, Y', strtotime($profile['created_at'])) }}</div>
                     </div>
-                    <div>
-                        <div style="font-size:18px; font-weight:600; line-height:1.2;">
-                            {{ $profile['full_name'] }}
-                        </div>
-                        <div style="margin-top:6px; display:inline-flex; align-items:center; gap:8px;">
-                            <span style="background:#111827; color:#f9fafb; border-radius:999px; padding:4px 10px; font-size:12px; text-transform:uppercase; letter-spacing:.04em;">Member since {{ date('M d, Y', strtotime($profile['created_at'])) }}</span>
-                        </div>
-                    </div>
+                    @if ((int)$profile['is_active'] === 1)
+                        <span class="status-pill is-active">Active</span>
+                    @else
+                        <span class="status-pill is-disabled">Disabled</span>
+                    @endif
                 </div>
 
-                <form method="post" action="" class="profile-form" id="profileForm" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
-    @csrf
+                <form method="post" action="" class="profile-form" id="profileForm">
+                    @csrf
                     <input type="hidden" name="action" value="update_profile">
 
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
-                        <label>Full Name</label>
-                        <div class="input-container">
-                            <input type="text" name="full_name" value="{{ $profile['full_name'] }}" required>
-                            <div class="input-focus-line"></div>
-                        </div>
-                        @if (isset($profileErrors['full_name']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['full_name'] }}</div>@endif
-                    </div>
-
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
-                        <label>Username</label>
-                        <div class="input-container">
-                            <input type="text" name="username" value="{{ $profile['username'] }}" required>
-                            <div class="input-focus-line"></div>
-                        </div>
-                        @if (isset($profileErrors['username']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['username'] }}</div>@endif
-                    </div>
-
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
-                        <label>Email</label>
-                        <div class="input-container">
-                            <input type="email" name="email" value="{{ $profile['email'] }}" required>
-                            <div class="input-focus-line"></div>
-                        </div>
-                        @if (isset($profileErrors['email']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['email'] }}</div>@endif
-                    </div>
-
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
-                        <label>Phone</label>
-                        <div class="input-container">
-                            <input type="text" name="phone" value="{{ $profile['phone'] ?? '' }}">
-                            <div class="input-focus-line"></div>
-                        </div>
-                        @if (isset($profileErrors['phone']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['phone'] }}</div>@endif
-                    </div>
-
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
-                        <label>User Type</label>
-                        <div class="input-container">
-							<select name="user_type">
-                                <option value="Student" {!! ($profile['user_type']==='Student')?'selected':'' !!}>Student</option>
-                                <option value="Regular" {!! ($profile['user_type']==='Regular')?'selected':'' !!}>Regular</option>
-                                <option value="Senior Citizen/PWD" {!! ($profile['user_type']==='Senior Citizen/PWD')?'selected':'' !!}>Senior Citizen/PWD</option>
-                            </select>
-							<i class="fas fa-chevron-down select-caret"></i>
-                            <div class="input-focus-line"></div>
-                        </div>
-                    </div>
-
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
-                        <label>New Password (optional)</label>
-                        <div class="input-container">
-                            <input type="password" id="password" name="password" placeholder="Leave blank to keep current">
-                            <button type="button" class="password-toggle" id="passwordToggle">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <div class="input-focus-line"></div>
-                        </div>
-                        @if (isset($profileErrors['password']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['password'] }}</div>@endif
-                    </div>
-
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
-                        <label>Confirm Password</label>
-                        <div class="input-container">
-                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat new password">
-                            <button type="button" class="password-toggle" id="confirmPasswordToggle">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <div class="input-focus-line"></div>
-                        </div>
-                        @if (isset($profileErrors['confirm_password']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['confirm_password'] }}</div>@endif
-                    </div>
-
-                    <div style="background:#111827; border-radius:12px; padding:16px;">
-                        <label style="color:#9ca3af; font-size:12px; text-transform:uppercase; letter-spacing:.06em; display:block;">Status</label>
-                        <div style="margin-top:6px; font-weight:500;">
-                            @if ((int)$profile['is_active'] === 1)
-                                <span style="background:#065f46; color:#ecfdf5; padding:4px 10px; border-radius:999px; font-size:12px;">Active</span>
-                            @else
-                                <span style="background:#7c2d12; color:#fff7ed; padding:4px 10px; border-radius:999px; font-size:12px;">Disabled</span>
-                            @endif
+                    <div>
+                        <h4 class="form-section-title">Account details</h4>
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="full_name">Full Name</label>
+                                <div class="input-container">
+                                    <input type="text" id="full_name" name="full_name" value="{{ $profile['full_name'] }}" required>
+                                    <div class="input-focus-line"></div>
+                                </div>
+                                @if (isset($profileErrors['full_name']))<div class="field-error">{{ $profileErrors['full_name'] }}</div>@endif
+                            </div>
+                            <div class="field">
+                                <label for="username">Username</label>
+                                <div class="input-container">
+                                    <input type="text" id="username" name="username" value="{{ $profile['username'] }}" required>
+                                    <div class="input-focus-line"></div>
+                                </div>
+                                @if (isset($profileErrors['username']))<div class="field-error">{{ $profileErrors['username'] }}</div>@endif
+                            </div>
+                            <div class="field">
+                                <label for="email">Email</label>
+                                <div class="input-container">
+                                    <input type="email" id="email" name="email" value="{{ $profile['email'] }}" required>
+                                    <div class="input-focus-line"></div>
+                                </div>
+                                @if (isset($profileErrors['email']))<div class="field-error">{{ $profileErrors['email'] }}</div>@endif
+                            </div>
+                            <div class="field">
+                                <label for="phone">Phone</label>
+                                <div class="input-container">
+                                    <input type="text" id="phone" name="phone" value="{{ $profile['phone'] ?? '' }}">
+                                    <div class="input-focus-line"></div>
+                                </div>
+                                @if (isset($profileErrors['phone']))<div class="field-error">{{ $profileErrors['phone'] }}</div>@endif
+                            </div>
+                            <div class="field">
+                                <label for="user_type">User Type</label>
+                                <div class="input-container">
+                                    <select id="user_type" name="user_type">
+                                        <option value="Student" {!! ($profile['user_type']==='Student')?'selected':'' !!}>Student</option>
+                                        <option value="Regular" {!! ($profile['user_type']==='Regular')?'selected':'' !!}>Regular</option>
+                                        <option value="Senior Citizen/PWD" {!! ($profile['user_type']==='Senior Citizen/PWD')?'selected':'' !!}>Senior Citizen/PWD</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down select-caret"></i>
+                                    <div class="input-focus-line"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div style="background:transparent; padding:0; grid-column: 1 / -1; display:flex; justify-content:flex-end;">
-                        <button type="submit" class="btn" style="display:inline-flex; align-items:center; gap:8px;"><i class="fas fa-save"></i> Save Changes</button>
+                    <div>
+                        <h4 class="form-section-title">Change password</h4>
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="password">New Password <span class="optional">(optional)</span></label>
+                                <div class="input-container">
+                                    <input type="password" id="password" name="password" placeholder="Leave blank to keep current">
+                                    <button type="button" class="password-toggle" id="passwordToggle" aria-label="Show password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="input-focus-line"></div>
+                                </div>
+                                @if (isset($profileErrors['password']))<div class="field-error">{{ $profileErrors['password'] }}</div>@endif
+                            </div>
+                            <div class="field">
+                                <label for="confirm_password">Confirm Password</label>
+                                <div class="input-container">
+                                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat new password">
+                                    <button type="button" class="password-toggle" id="confirmPasswordToggle" aria-label="Show password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="input-focus-line"></div>
+                                </div>
+                                @if (isset($profileErrors['confirm_password']))<div class="field-error">{{ $profileErrors['confirm_password'] }}</div>@endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn"><i class="fas fa-save"></i> Save Changes</button>
                     </div>
                 </form>
 
                 @else
-                <div class="qa" style="justify-content:flex-start"><i class="fas fa-circle-info"></i><span>Profile not found.</span></div>
+                <div class="settings-alert is-info"><i class="fas fa-circle-info"></i><span>Profile not found.</span></div>
                 @endif
             </section>
 
             <!-- System Maintenance Section -->
             <section class="panel">
-                <h3><i class="fas fa-cog text-blue-500"></i> System Maintenance</h3>
-                
+                <h3><i class="fas fa-screwdriver-wrench"></i> System Maintenance</h3>
+
                 @if ($cleanupResult)
-                    <div class="qa" style="justify-content:flex-start; margin-bottom:16px; color:{!! $cleanupResult['success'] ? '#22c55e' : '#ef4444' !!}">
-                        <i class="fas fa-{!! $cleanupResult['success'] ? 'check-circle' : 'circle-exclamation' !!}"></i>
+                    <div class="settings-alert {{ $cleanupResult['success'] ? 'is-success' : 'is-error' }}">
+                        <i class="fas fa-{{ $cleanupResult['success'] ? 'check-circle' : 'circle-exclamation' }}"></i>
                         <span>{{ $cleanupResult['message'] }}</span>
                     </div>
                 @endif
 
-                <!-- Active Trips Status -->
-                <div style="margin-bottom: 24px;">
-                    <div style="font-size: 12px; color: #9ca3af; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Active Trips</div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
-                        <div style="padding: 12px 14px; border-radius: 8px; border-left: 3px solid #3b82f6; background: rgba(59,130,246,0.08);">
-                            <div style="font-size: 11px; color: #9ca3af; margin-bottom: 6px;">Scheduled</div>
-                            <div style="font-size: 24px; font-weight: 700; color: #3b82f6;">{!! $cleanupStats['scheduled_trips'] !!}</div>
-                        </div>
-                        <div style="padding: 12px 14px; border-radius: 8px; border-left: 3px solid #eab308; background: rgba(234,179,8,0.08);">
-                            <div style="font-size: 11px; color: #9ca3af; margin-bottom: 6px;">In Transit</div>
-                            <div style="font-size: 24px; font-weight: 700; color: #eab308;">{!! $cleanupStats['departed_trips'] !!}</div>
-                        </div>
-                        <div style="padding: 12px 14px; border-radius: 8px; border-left: 3px solid #22c55e; background: rgba(34,197,94,0.08);">
-                            <div style="font-size: 11px; color: #9ca3af; margin-bottom: 6px;">Completed</div>
-                            <div style="font-size: 24px; font-weight: 700; color: #22c55e;">{!! $cleanupStats['completed_trips'] !!}</div>
-                        </div>
+                <div class="maint-block">
+                    <h4 class="maint-label">Active Trips</h4>
+                    <div class="trip-stats">
+                        <div class="trip-stat" style="--c:#3b82f6"><span>Scheduled</span><strong>{{ $cleanupStats['scheduled_trips'] }}</strong></div>
+                        <div class="trip-stat" style="--c:#eab308"><span>In Transit</span><strong>{{ $cleanupStats['departed_trips'] }}</strong></div>
+                        <div class="trip-stat" style="--c:#22c55e"><span>Completed</span><strong>{{ $cleanupStats['completed_trips'] }}</strong></div>
                     </div>
                 </div>
 
-                <!-- Data Cleanup Status -->
-                <div style="margin-bottom: 24px; padding: 16px; background: linear-gradient(135deg, rgba(168,85,247,0.05), rgba(99,102,241,0.05)); border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
-                    <div style="font-size: 12px; color: #9ca3af; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Data Management</div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px;">
-                        <div>
-                            <div style="font-size: 13px; color: #e5e7eb; font-weight: 600; margin-bottom: 4px;">Completed Trips</div>
-                            <div style="font-size: 28px; font-weight: 700; color: #a855f7;">{!! $cleanupStats['completed_awaiting_cleanup'] !!}</div>
-                            <div style="font-size: 11px; color: #d8b4fe; margin-top: 4px;">Auto-cleaned in 24h</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 13px; color: #e5e7eb; font-weight: 600; margin-bottom: 4px;">Completed Bookings</div>
-                            <div style="font-size: 28px; font-weight: 700; color: #a855f7;">{!! $cleanupStats['completed_bookings'] !!}</div>
-                            <div style="font-size: 11px; color: #d8b4fe; margin-top: 4px;">Auto-cleaned in 24h</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 13px; color: #e5e7eb; font-weight: 600; margin-bottom: 4px;">Cancelled Bookings</div>
-                            <div style="font-size: 28px; font-weight: 700; color: #ef4444;">{!! $cleanupStats['cancelled_bookings'] !!}</div>
-                            <div style="font-size: 11px; color: #fca5a5; margin-top: 4px;">Auto-cleaned</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 13px; color: #e5e7eb; font-weight: 600; margin-bottom: 4px;">Archived Records</div>
-                            <div style="font-size: 28px; font-weight: 700; color: #8b5cf6;">{!! $cleanupStats['archived_bookings'] !!}</div>
-                            <div style="font-size: 11px; color: #ddd6fe; margin-top: 4px;">Historical data</div>
-                        </div>
+                <div class="maint-block">
+                    <h4 class="maint-label">Data Management</h4>
+                    <div class="data-stats">
+                        <div class="data-stat" style="--c:#a855f7"><div class="data-stat-title">Completed Trips</div><strong>{{ $cleanupStats['completed_awaiting_cleanup'] }}</strong><small>Auto-cleaned in 24h</small></div>
+                        <div class="data-stat" style="--c:#a855f7"><div class="data-stat-title">Completed Bookings</div><strong>{{ $cleanupStats['completed_bookings'] }}</strong><small>Auto-cleaned in 24h</small></div>
+                        <div class="data-stat" style="--c:#ef4444"><div class="data-stat-title">Cancelled Bookings</div><strong>{{ $cleanupStats['cancelled_bookings'] }}</strong><small>Auto-cleaned</small></div>
+                        <div class="data-stat" style="--c:#8b5cf6"><div class="data-stat-title">Archived Records</div><strong>{{ $cleanupStats['archived_bookings'] }}</strong><small>Historical data</small></div>
                     </div>
                 </div>
 
-                <!-- Cleanup Action -->
-                <div style="display: flex; gap: 16px; align-items: center; padding: 14px; background: rgba(168,85,247,0.05); border-radius: 8px; border: 1px solid rgba(168,85,247,0.2);">
-                    <div style="display: flex; gap: 12px; align-items: center; flex: 1;">
-                        <button type="button" class="btn" onclick="showCleanupConfirmation()" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #a855f7, #9333ea); border: 1px solid rgba(168,85,247,0.6); padding: 10px 18px; font-size: 13px; font-weight: 500; white-space: nowrap; cursor: pointer;">
+                <div class="maint-block">
+                    <div class="cleanup-bar">
+                        <button type="button" class="btn btn-clean" onclick="showCleanupConfirmation()">
                             <i class="fas fa-trash-alt"></i> Clean Data
                         </button>
-                        <div style="font-size: 12px; color: #b8c7db; line-height: 1.5;">
-                            <div style="color: #9ca3af; margin-bottom: 2px;">Last run</div>
-                            <div style="color: #d8b4fe; font-weight: 500;">{!! $cleanupStats['last_maintenance_run'] !!}</div>
+                        <div class="cleanup-last">Last run<strong>{{ $cleanupStats['last_maintenance_run'] }}</strong></div>
+                        <div class="cleanup-notes">
+                            <div>Auto-runs every 24 hours</div>
+                            <div><i class="fas fa-check"></i>Only removes old completed trips</div>
                         </div>
-                    </div>
-                    <div style="height: 30px; width: 1px; background: rgba(255,255,255,0.1);"></div>
-                    <div style="font-size: 12px; color: #b8c7db; text-align: right; line-height: 1.6;">
-                        <div style="color: #9ca3af;">Auto-runs every 24 hours</div>
-                        <div style="margin-top: 4px;">✓ Only removes old completed trips</div>
                     </div>
                 </div>
 
                 <!-- Hidden form for cleanup submission -->
                 <form id="cleanupForm" method="post" action="" style="display: none;">
-    @csrf
+                    @csrf
                     <input type="hidden" name="action" value="cleanup">
                 </form>
             </section>
+            </div>
         </main>
     </div>
     

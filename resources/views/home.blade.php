@@ -58,6 +58,12 @@
         </div>
     </header>
 
+    @if (session('logged_out'))
+        <div class="container" role="status">
+            You have been logged out.
+        </div>
+    @endif
+
     <main>
         <section class="hero">
             <div class="hero-bg" aria-hidden="true">

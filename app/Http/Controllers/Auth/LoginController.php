@@ -79,7 +79,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with('logged_out', true);
+        return redirect()->route('home')->with('logged_out', true);
     }
 
     private function fail(string $message): View

@@ -1096,14 +1096,26 @@
         @include('partials.sidebar')
         <button class="btn-ghost hamburger-btn" id="mobileMenuToggle" title="Toggle menu"><i class="fas fa-bars"></i></button>
         <main class="content">
-            <header class="topbar">
-                <div class="welcome">
-                    <h2>Welcome, {{ $full_name }} 👋</h2>
-                    <p>Your bus reservation overview</p>
+            <header class="dash-hero">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>Administrator</span>
+                    </div>
+                    <h1>Welcome back, {{ $full_name }}</h1>
+                    <p>Monitor bookings, trips, buses, and revenue across your bus reservation system.</p>
+                    <div class="hero-clock"><i class="fas fa-clock"></i> <span id="current-time"></span></div>
                 </div>
-                <div class="current-time">
-                    <span id="current-time"></span>
-                </div>
+                <section class="hero-aside" aria-labelledby="heroWeatherTitle">
+                    <div class="hero-aside-head">
+                        <span class="hero-aside-label" id="heroWeatherTitle"><i class="fas fa-cloud-sun"></i> Weather Conditions</span>
+                    </div>
+                    <div id="weather-alerts" aria-live="polite">
+                        <div class="hero-weather-status">
+                            <i class="fas fa-spinner fa-spin"></i> Loading weather information...
+                        </div>
+                    </div>
+                </section>
             </header>
             <section class="kpis" aria-label="Key figures">
                 <div class="kpi">
@@ -1158,17 +1170,6 @@
                 </section>
 
                 <div class="dash-side">
-                    <section class="panel weather-panel">
-                <h3><i class="fas fa-cloud text-blue-500"></i>Weather Conditions</h3>
-                <div class="weather-carousel" id="weatherCarouselContainer">
-                    <div id="weather-alerts" class="weather-container">
-                        <div class="loading-weather" style="text-align: center; padding: 20px; color: #94a3b8;">
-                            <i class="fas fa-spinner fa-spin"></i> Loading weather information...
-                        </div>
-                    </div>
-                </div>
-            </section>
-
                     <section class="panel">
                     <h3><i class="fas fa-bell text-purple-500"></i> System Alerts</h3>
                     @if (!$lowSeatAlerts)
@@ -1375,7 +1376,6 @@
     <!-- Load Lottie player locally for offline support -->
     <script src="{{ asset('assets/js/lottie/lottie-player.js') }}"></script>
     <script src="{{ asset('assets/js/weather-integration.js') }}"></script>
-    <script src="{{ asset('assets/js/weather-carousel.js') }}"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize current time display
@@ -1393,7 +1393,7 @@
                 second: '2-digit',
                 hour12: true 
             });
-            timeElement.textContent = `${dateStr} | ${timeStr}`;
+            timeElement.textContent = `${dateStr} · ${timeStr}`;
         }
         updateTime();
         setInterval(updateTime, 1000);

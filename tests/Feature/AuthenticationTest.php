@@ -22,7 +22,7 @@ class AuthenticationTest extends TestCase
             ->assertSee('Login successful! Redirecting...');
         $this->assertAuthenticatedAs($user);
 
-        $this->post(route('logout'))->assertRedirect(route('login'));
+        $this->post(route('logout'))->assertRedirect(route('home'));
         $this->assertGuest();
 
         $this->post(route('login.store'), ['username' => 'juan@example.com', 'password' => 'password'])->assertOk();

@@ -108,8 +108,8 @@ class PageRenderingTest extends TestCase
     {
         $this->actingAs($this->admin)->get(route('admin.dashboard'))
             ->assertOk()
-            ->assertSeeInOrder(["Today's Bookings", 'Revenue This Month', 'Occupancy Today', 'Fleet In Service'])
-            ->assertSeeInOrder(['Bookings &amp; Revenue', 'Weather Conditions', 'System Alerts', 'Available Buses', 'Today &amp; Upcoming Trips', 'Recent Bookings'], false)
+            ->assertSeeInOrder(['class="dash-hero"', 'Weather Conditions', "Today's Bookings", 'Revenue This Month', 'Occupancy Today', 'Fleet In Service'], false)
+            ->assertSeeInOrder(['Bookings &amp; Revenue', 'System Alerts', 'Available Buses', 'Today &amp; Upcoming Trips', 'Recent Bookings'], false)
             ->assertSee('class="seat-fill-bar"', false)
             ->assertSee("label: 'Revenue (₱)'", false);
     }
@@ -120,9 +120,9 @@ class PageRenderingTest extends TestCase
         $this->actingAs($this->customer)->get(route('customer.dashboard'))
             ->assertOk()
             ->assertSee(asset('assets/css/dashboard-layout.css'), false)
-            ->assertSeeInOrder(['Trips Available', 'My Upcoming Rides', 'My Bookings', 'Total Spent'])
+            ->assertSeeInOrder(['class="dash-hero"', 'Weather Conditions', 'Trips Available', 'My Upcoming Rides', 'My Bookings', 'Total Spent'], false)
             ->assertSee('₱500.00')
-            ->assertSeeInOrder(['Available Trips', 'Weather Conditions', 'Popular Routes', 'Buses with Scheduled Trips', 'My Recent Bookings'])
+            ->assertSeeInOrder(['Available Trips', 'Popular Routes', 'Buses with Scheduled Trips', 'My Recent Bookings'])
             ->assertDontSee('<div class="main-layout"', false);
     }
 
