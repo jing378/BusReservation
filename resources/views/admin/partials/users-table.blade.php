@@ -16,7 +16,7 @@
 						</thead>
 						<tbody>
                             @if (!$users)
-							<tr><td colspan="9" style="text-align:center">No users found.</td></tr>
+							<tr><td colspan="10" style="text-align:center">No users found.</td></tr>
                             @else
                             @php($i = $offset + 1)
                             @foreach ($users as $u)
@@ -32,7 +32,7 @@
 								<td>{!! date('M j, Y', strtotime($u['created_at'])) !!}</td>
 								<td class="actions">
 									<button class="btn btn-sm btn-edit" onclick="editUser({!! $u['id'] !!})" title="Edit User"><i class="fas fa-edit"></i></button>
-									<button class="btn btn-sm btn-danger" onclick="deleteUser({!! $u['id'] !!}, '{{ $u['full_name'] }}', '{{ $u['email'] }}', '{{ $u['role'] }}')"><i class="fas fa-trash"></i></button>
+									<button class="btn btn-sm btn-danger" title="Delete User" onclick="deleteUser({!! $u['id'] !!}, '{{ $u['full_name'] }}', '{{ $u['email'] }}', '{{ $u['role'] }}')"><i class="fas fa-trash"></i></button>
 								</td>
 							</tr>
 							@endforeach

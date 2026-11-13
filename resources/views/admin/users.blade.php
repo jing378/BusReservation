@@ -86,7 +86,7 @@
 						</thead>
 						<tbody>
                             @if (!$users)
-							<tr><td colspan="9" style="text-align:center">No users found.</td></tr>
+							<tr><td colspan="10" style="text-align:center">No users found.</td></tr>
                             @else
                             @php($i = $offset + 1)
                             @foreach ($users as $u)
@@ -102,7 +102,7 @@
 								<td>{!! date('M j, Y', strtotime($u['created_at'])) !!}</td>
 								<td class="actions">
 						<button class="btn btn-sm btn-edit" onclick="editUser({!! $u['id'] !!})" title="Edit User"><i class="fas fa-pen"></i></button>
-									<button class="btn btn-sm btn-danger" onclick="deleteUser({!! $u['id'] !!}, '{{ $u['full_name'] }}', '{{ $u['email'] }}', '{{ $u['role'] }}')"><i class="fas fa-trash"></i></button>
+									<button class="btn btn-sm btn-danger" title="Delete User" onclick="deleteUser({!! $u['id'] !!}, '{{ $u['full_name'] }}', '{{ $u['email'] }}', '{{ $u['role'] }}')"><i class="fas fa-trash"></i></button>
 								</td>
 							</tr>
 							@endforeach
@@ -1048,177 +1048,37 @@
 			visibility: visible !important;
 			opacity: 1 !important;
 		}
-		
-		/* Comprehensive Responsive Design */
-		@media (max-width: 992px) {
-			.table {
-				font-size: 13px;
-			}
-			
-			.table th,
-			.table td {
-				padding: 8px;
-			}
-			
-			.status-badge {
-				font-size: 11px;
-				padding: 3px 8px;
-			}
-			
-			.search-form {
-				flex-direction: column;
-				gap: 1rem;
-			}
-			
-			.search-form .field {
-				width: 100%;
+
+		/* ---------- Tablet & phone ---------- */
+		@media (max-width: 980px) {
+			/* Filter dropdown opens under the search row instead of off-screen to the right. */
+			.filter-panel {
+				top: calc(100% + 8px);
+				left: 0;
+				min-width: 0;
+				width: min(480px, 100%);
 			}
 		}
-		
-		@media (max-width: 768px) {
-			.table {
-				font-size: 12px;
+
+		/* ---------- Phones (shared card / button rules live in mobile.css) ---------- */
+		@media (max-width: 640px) {
+			.table td:first-child:not([colspan]) {
+				display: none;
 			}
-			
-			.table th,
-			.table td {
-				padding: 6px;
+			.table td:nth-child(2) {
+				font-size: 15px;
+				font-weight: 600;
 			}
-			
-			.panel h3 {
-				font-size: 1rem;
+			.password-toggle {
+				width: 40px;
+				height: 40px;
 			}
-			
-			.status-badge {
-				font-size: 10px;
-				padding: 2px 6px;
-			}
-			
-			.btn {
-				padding: 8px 12px;
-				font-size: 13px;
-			}
-			
-			.search-form {
-				gap: 0.75rem;
-			}
-			
-			.input-container {
-				font-size: 14px;
-			}
-			
-			.input-container input,
-			.input-container select {
-				padding: 10px 12px;
+			.password-input-container input[type="password"],
+			.password-input-container input[type="text"] {
+				padding-right: 56px;
 			}
 		}
-		
-		@media (max-width: 576px) {
-			.table {
-				font-size: 11px;
-			}
-			
-			.table th,
-			.table td {
-				padding: 4px;
-			}
-			
-			.panel {
-				padding: 0.75rem;
-			}
-			
-			.panel h3 {
-				font-size: 0.9rem;
-				margin-bottom: 0.75rem;
-			}
-			
-			.status-badge {
-				font-size: 9px;
-				padding: 1px 4px;
-			}
-			
-			.btn {
-				padding: 6px 10px;
-				font-size: 12px;
-			}
-			
-			.search-form {
-				gap: 0.5rem;
-			}
-			
-			.input-container {
-				font-size: 13px;
-			}
-			
-			.input-container input,
-			.input-container select {
-				padding: 8px 10px;
-			}
-			
-			.pagination {
-				flex-wrap: wrap;
-				gap: 4px;
-			}
-			
-			.pagination a,
-			.pagination span {
-				padding: 6px 8px;
-				font-size: 12px;
-			}
-		}
-		
-		@media (max-width: 480px) {
-			.table {
-				font-size: 10px;
-			}
-			
-			.table th,
-			.table td {
-				padding: 3px;
-			}
-			
-			.panel {
-				padding: 0.5rem;
-			}
-			
-			.panel h3 {
-				font-size: 0.8rem;
-				margin-bottom: 0.5rem;
-			}
-			
-			.status-badge {
-				font-size: 8px;
-				padding: 1px 3px;
-			}
-			
-			.btn {
-				padding: 5px 8px;
-				font-size: 11px;
-			}
-			
-			.search-form {
-				gap: 0.4rem;
-			}
-			
-			.input-container {
-				font-size: 12px;
-			}
-			
-			.input-container input,
-			.input-container select {
-				padding: 6px 8px;
-			}
-			
-			.pagination {
-				gap: 2px;
-			}
-			
-			.pagination a,
-			.pagination span {
-				padding: 4px 6px;
-				font-size: 11px;
-			}
-		}
+
 	</style>
 
 	<script>

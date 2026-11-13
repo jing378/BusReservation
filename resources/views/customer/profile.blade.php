@@ -290,134 +290,57 @@
         visibility: visible !important;
         opacity: 1 !important;
     }
-    
-    /* Comprehensive Responsive Design */
-    @media (max-width: 992px) {
-        .table {
-            font-size: 13px;
-        }
-        
-        .table th,
-        .table td {
-            padding: 8px;
-        }
-        
-        .status-badge {
-            font-size: 11px;
-            padding: 3px 8px;
-        }
+    /* Layout */
+    .profile-panel { max-width: 960px; margin-left: auto; margin-right: auto; }
+    .profile-header {
+        display: flex; gap: 16px; align-items: center;
+        padding: 4px 0 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line);
     }
-    
-    @media (max-width: 768px) {
-        .table {
-            font-size: 12px;
-        }
-        
-        .table th,
-        .table td {
-            padding: 6px;
-        }
-        
-        .panel h3 {
-            font-size: 1rem;
-        }
-        
-        .status-badge {
-            font-size: 10px;
-            padding: 2px 6px;
-        }
-        
-        .btn {
-            padding: 8px 12px;
-            font-size: 13px;
-        }
-        
-        .input-container {
-            font-size: 14px;
-        }
-        
-        .input-container input,
-        .input-container select {
-            padding: 10px 12px;
-        }
+    .profile-avatar {
+        flex: 0 0 64px; width: 64px; height: 64px; border-radius: 50%;
+        background: linear-gradient(135deg, #38bdf8, #2563eb); color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 600; font-size: 20px;
     }
-    
-    @media (max-width: 576px) {
-        .table {
-            font-size: 11px;
-        }
-        
-        .table th,
-        .table td {
-            padding: 4px;
-        }
-        
-        .panel {
-            padding: 0.75rem;
-        }
-        
-        .panel h3 {
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        .status-badge {
-            font-size: 9px;
-            padding: 1px 4px;
-        }
-        
-        .btn {
-            padding: 6px 10px;
-            font-size: 12px;
-        }
-        
-        .input-container {
-            font-size: 13px;
-        }
-        
-        .input-container input,
-        .input-container select {
-            padding: 8px 10px;
-        }
+    .profile-identity { min-width: 0; }
+    .profile-name { font-size: 18px; font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; }
+    .profile-meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .profile-pill {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: rgba(255,255,255,0.05); border: 1px solid var(--line); color: #cbd5e1;
+        border-radius: 999px; padding: 4px 10px; font-size: 12px; line-height: 1.3;
     }
-    
-    @media (max-width: 480px) {
-        .table {
-            font-size: 10px;
-        }
-        
-        .table th,
-        .table td {
-            padding: 3px;
-        }
-        
-        .panel {
-            padding: 0.5rem;
-        }
-        
-        .panel h3 {
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .status-badge {
-            font-size: 8px;
-            padding: 1px 3px;
-        }
-        
-        .btn {
-            padding: 5px 8px;
-            font-size: 11px;
-        }
-        
-        .input-container {
-            font-size: 12px;
-        }
-        
-        .input-container input,
-        .input-container select {
-            padding: 6px 8px;
-        }
+    .profile-pill.is-active { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.35); color: #4ade80; }
+    .profile-pill.is-disabled { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.35); color: #f87171; }
+
+    .profile-form { display: flex; flex-direction: column; gap: 20px; }
+    .profile-section-title {
+        display: flex; align-items: center; gap: 8px; margin: 0 0 4px;
+        font-size: 14px; font-weight: 600; color: #e5e7eb;
+    }
+    .profile-section-title i { color: #3b82f6; }
+    .profile-section-hint { margin: 0 0 12px; font-size: 12px; color: var(--muted); }
+    .profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .profile-section + .profile-section { padding-top: 20px; border-top: 1px solid var(--line); }
+    .profile-form .field { min-width: 0; }
+    .profile-form .input-container input,
+    .profile-form .input-container select { min-width: 0; width: 100%; }
+    .profile-form .input-container input[readonly] { color: #94a3b8; cursor: not-allowed; }
+    .profile-actions { display: flex; justify-content: flex-end; padding-top: 16px; border-top: 1px solid var(--line); }
+    .profile-actions .btn { min-height: 44px; padding: 10px 18px; }
+
+    @media (max-width: 720px) {
+        .profile-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+        .profile-actions .btn { width: 100%; justify-content: center; }
+        .profile-form .password-toggle { width: 40px; height: 40px; }
+        .profile-form .input-container input#password,
+        .profile-form .input-container input#confirm_password { padding-right: 48px; }
+    }
+
+    @media (max-width: 420px) {
+        .profile-header { gap: 12px; }
+        .profile-avatar { flex-basis: 52px; width: 52px; height: 52px; font-size: 17px; }
+        .profile-name { font-size: 16px; }
     }
     </style>
     <link rel="stylesheet" href="{{ asset('assets/css/mobile.css') }}">
@@ -432,30 +355,40 @@
                 <div class="welcome"><h2>User Profile</h2><p>Profile & Application preferences</p></div>
                 <div class="actions"></div>
             </header>
-            <section class="panel" style="margin-bottom:16px;">
+            <section class="panel profile-panel">
                 <h3>My Profile</h3>
                 @if ($profile)
                 @if ($profileOk)<div class="qa" style="justify-content:flex-start;color:#22c55e"><i class="fas fa-check-circle"></i><span>{{ $profileOk }}</span></div>@endif
                 @if ($profileErrors)<div class="qa" style="justify-content:flex-start;color:#ef4444"><i class="fas fa-circle-exclamation"></i><span>Please fix the form errors.</span></div>@endif
-                <div style="display:flex; gap:20px; align-items:center; margin-bottom:16px;">
-                    <div style="width:64px; height:64px; border-radius:50%; background:#0ea5e9; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:20px;">
+                <div class="profile-header">
+                    <div class="profile-avatar">
                         {{ $initials ?: 'U' }}
                     </div>
-                    <div>
-                        <div style="font-size:18px; font-weight:600; line-height:1.2;">
+                    <div class="profile-identity">
+                        <div class="profile-name">
                             {{ $profile['full_name'] }}
                         </div>
-                        <div style="margin-top:6px; display:inline-flex; align-items:center; gap:8px;">
-                            <span style="background:#111827; color:#f9fafb; border-radius:999px; padding:4px 10px; font-size:12px; text-transform:uppercase; letter-spacing:.04em;">Member since {{ date('M d, Y', strtotime($profile['created_at'])) }}</span>
+                        <div class="profile-meta">
+                            <span class="profile-pill"><i class="fas fa-calendar-check"></i> Member since {{ date('M d, Y', strtotime($profile['created_at'])) }}</span>
+                            <span class="profile-pill"><i class="fas fa-tag"></i> {{ $profile['user_type'] }}</span>
+                            @if ((int) $profile['is_active'] === 1)
+                                <span class="profile-pill is-active"><i class="fas fa-circle-check"></i> Active</span>
+                            @else
+                                <span class="profile-pill is-disabled"><i class="fas fa-ban"></i> Disabled</span>
+                            @endif
                         </div>
                     </div>
                 </div>
 
-                <form method="post" action="{{ route('customer.profile.store') }}" class="profile-form" id="profileForm" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+                <form method="post" action="{{ route('customer.profile.store') }}" class="profile-form" id="profileForm">
     @csrf
                     <input type="hidden" name="action" value="update_profile">
 
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
+                    <div class="profile-section">
+                        <h4 class="profile-section-title"><i class="fas fa-id-card"></i> Account details</h4>
+                        <p class="profile-section-hint">Your name and contact details as they appear on bookings.</p>
+                        <div class="profile-grid">
+                    <div class="field">
                         <label>Full Name</label>
                         <div class="input-container">
                             <input type="text" name="full_name" value="{{ $profile['full_name'] }}" required>
@@ -464,7 +397,7 @@
                         @if (isset($profileErrors['full_name']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['full_name'] }}</div>@endif
                     </div>
 
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
+                    <div class="field">
                         <label>Username</label>
                         <div class="input-container">
                             <input type="text" name="username" value="{{ $profile['username'] }}" required>
@@ -473,7 +406,7 @@
                         @if (isset($profileErrors['username']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['username'] }}</div>@endif
                     </div>
 
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
+                    <div class="field">
                         <label>Email</label>
                         <div class="input-container">
                             <input type="email" name="email" value="{{ $profile['email'] }}" required>
@@ -482,7 +415,7 @@
                         @if (isset($profileErrors['email']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['email'] }}</div>@endif
                     </div>
 
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
+                    <div class="field">
                         <label>Phone</label>
                         <div class="input-container">
                             <input type="text" name="phone" value="{{ $profile['phone'] ?? '' }}">
@@ -491,7 +424,7 @@
                         @if (isset($profileErrors['phone']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['phone'] }}</div>@endif
                     </div>
 
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
+                    <div class="field">
                         <label>User Type</label>
                         <div class="input-container">
                             @if (auth()->user()->isAdmin())
@@ -500,17 +433,24 @@
                                 <option value="Regular" {!! ($profile['user_type']==='Regular')?'selected':'' !!}>Regular</option>
                                 <option value="Senior Citizen/PWD" {!! ($profile['user_type']==='Senior Citizen/PWD')?'selected':'' !!}>Senior Citizen/PWD</option>
                             </select>
+                            <i class="fas fa-chevron-down select-caret"></i>
                             @else
                             <input type="text" value="{{ $profile['user_type'] }}" readonly>
                             <input type="hidden" name="user_type" value="{{ $profile['user_type'] }}">
                             @endif
-							<i class="fas fa-chevron-down select-caret"></i>
                             <div class="input-focus-line"></div>
                         </div>
                     </div>
 
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
-                        <label>New Password (optional)</label>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h4 class="profile-section-title"><i class="fas fa-lock"></i> Change password</h4>
+                        <p class="profile-section-hint">Leave both fields blank to keep your current password.</p>
+                        <div class="profile-grid">
+                    <div class="field">
+                        <label>New Password</label>
                         <div class="input-container">
                             <input type="password" id="password" name="password" placeholder="Leave blank to keep current">
                             <button type="button" class="password-toggle" id="passwordToggle">
@@ -521,7 +461,7 @@
                         @if (isset($profileErrors['password']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['password'] }}</div>@endif
                     </div>
 
-                    <div class="field" style="background:#111827; border-radius:12px; padding:16px;">
+                    <div class="field">
                         <label>Confirm Password</label>
                         <div class="input-container">
                             <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat new password">
@@ -533,18 +473,10 @@
                         @if (isset($profileErrors['confirm_password']))<div style="color:#ef4444; font-size:12px; margin-top:6px;">&nbsp;{{ $profileErrors['confirm_password'] }}</div>@endif
                     </div>
 
-                    <div style="background:#111827; border-radius:12px; padding:16px;">
-                        <label style="color:#9ca3af; font-size:12px; text-transform:uppercase; letter-spacing:.06em; display:block;">Status</label>
-                        <div style="margin-top:6px; font-weight:500;">
-                            @if ((int)$profile['is_active'] === 1)
-                                <span style="background:#065f46; color:#ecfdf5; padding:4px 10px; border-radius:999px; font-size:12px;">Active</span>
-                            @else
-                                <span style="background:#7c2d12; color:#fff7ed; padding:4px 10px; border-radius:999px; font-size:12px;">Disabled</span>
-                            @endif
                         </div>
                     </div>
 
-                    <div style="background:transparent; padding:0; grid-column: 1 / -1; display:flex; justify-content:flex-end;">
+                    <div class="profile-actions">
                         <button type="submit" class="btn" style="display:inline-flex; align-items:center; gap:8px;"><i class="fas fa-save"></i> Save Changes</button>
                     </div>
                 </form>
